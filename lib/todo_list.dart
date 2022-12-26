@@ -36,13 +36,19 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Checkbox(value: users[index].isCompleted, onChanged: null),
-            title: Text(users[index].title),
-          );
-        });
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: const Text("Todo"),
+        ),
+        body: ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading:
+                    Checkbox(value: users[index].isCompleted, onChanged: null),
+                title: Text(users[index].title),
+              );
+            }));
   }
 }
