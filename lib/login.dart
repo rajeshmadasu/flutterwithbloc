@@ -14,7 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordTextContorller = TextEditingController();
 
   String _errorMessage = "";
-  void validateEmail(String val) {
+  void validateEmail(String val, BuildContext context) {
     if (val.isEmpty) {
       setState(() {
         _errorMessage = "Email can not be empty";
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  _navigateToHome() {
+  _navigateToHome(BuildContext context) {
     String emailText = _emailTextController.text;
     validateEmail(emailText);
   }
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
-                onPressed: _navigateToHome,
+                onPressed: () => _navigateToHome(context),
                 child: const Text(
                   'Login',
                   style: TextStyle(color: Colors.white, fontSize: 25),
