@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                 keyboardType: TextInputType.emailAddress,
                 controller: _emailTextController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
                     hintText: 'Enter valid email id '),
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                 obscureText: true,
                 controller: _passwordTextContorller,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Enter your password'),
@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Text(
               _errorMessage,
-              style: TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.red),
             ),
             const SizedBox(
               height: 130,
