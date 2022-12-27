@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './todo_list.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,13 +16,11 @@ class _LoginScreenState extends State<LoginScreen> {
   String _errorMessage = "";
   void validateEmail(String val, BuildContext context) {
     if (val.isEmpty) {
-      setState(() {
-        _errorMessage = "Email can not be empty";
-      });
+      _errorMessage = "Email can not be empty";
+      _showToastMessage(_errorMessage);
     } else if (!EmailValidator.validate(val, true)) {
-      setState(() {
-        _errorMessage = "Invalid Email Address";
-      });
+      _errorMessage = "Invalid Email Address";
+      _showToastMessage(_errorMessage);
     } else {
       setState(() {
         _errorMessage = "";
@@ -30,14 +28,27 @@ class _LoginScreenState extends State<LoginScreen> {
       if (_emailTextController.text.isNotEmpty &&
           _passwordTextContorller.text.isNotEmpty &&
           EmailValidator.validate(_emailTextController.text, true)) {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => TodoList()));
+        //  Navigator.push(context, MaterialPageRoute(builder: (_) => TodoList()));
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/todolist', (Route<dynamic> route) => false);
       }
     }
   }
 
-  _navigateToHome(BuildContext context) {
+  void _showToastMessage(String message) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  void _navigateToHome(BuildContext context) {
     String emailText = _emailTextController.text;
-    validateEmail(emailText);
+    validateEmail(emailText, context);
   }
 
   @override
@@ -101,13 +112,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Text(
-              _errorMessage,
-              style: const TextStyle(color: Colors.red),
             ),
             const SizedBox(
               height: 130,

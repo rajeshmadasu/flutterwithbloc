@@ -45,9 +45,15 @@ class _TodoListState extends State<TodoList> {
             itemCount: users.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading:
-                    Checkbox(value: users[index].isCompleted, onChanged: null),
-                title: Text(users[index].title),
+                leading: Checkbox(value: false, onChanged: null),
+                title: Text(users[index].title,
+                    style: users[index].isCompleted
+                        ? const TextStyle(
+                            fontSize: 18,
+                            decoration: TextDecoration.lineThrough)
+                        : const TextStyle(
+                            fontSize: 18,
+                          )),
               );
             }));
   }

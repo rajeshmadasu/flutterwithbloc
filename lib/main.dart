@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:httpapisample/todo_list.dart';
 import './login.dart';
 
 void main() {
@@ -14,9 +15,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todo App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          colorScheme: ColorScheme.fromSwatch()
+              .copyWith(primary: Colors.blue, error: Colors.red)
+              .copyWith(secondary: Colors.amber)),
       home: const LoginScreen(),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/loginscreen': (context) => const LoginScreen(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/todolist': (context) => const TodoList(),
+      },
     );
   }
 }
