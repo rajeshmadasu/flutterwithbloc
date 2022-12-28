@@ -20,29 +20,45 @@ class _TodoListState extends State<TodoList> {
   Map _source = {ConnectivityResult.none: false};
   final NetworkConnectivity _networkConnectivity = NetworkConnectivity.instance;
   String string = '';
+  bool isOffline = false;
+  bool isMobileOnline = false;
+  bool isWifiOnline = false;
+
+  void checkNetworkConnectivity() {
+    _networkConnectivity.myStream.listen((source) {
+      _source = source;
+      //print('source $_source');
+
+      // 1.
+      switch (_source.keys.toList()[0]) {
+        case ConnectivityResult.mobile:
+          isMobileOnline = _source.values.toList()[0];
+          //   string = isMobileOnline ? 'Mobile: Online' : 'Mobile: Offline';
+
+          break;
+        case ConnectivityResult.wifi:
+          isWifiOnline = _source.values.toList()[0];
+          //   string = isWifiOnline ? 'WiFi: Online' : 'WiFi: Offline';
+          break;
+        case ConnectivityResult.none:
+
+        default:
+        //  string = 'Offline';
+      }
+    });
+
+    if (!isMobileOnline && !isWifiOnline) {
+      setState(() {
+        isOffline = true;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     _networkConnectivity.initialise();
-    _networkConnectivity.myStream.listen((source) {
-      _source = source;
-      print('source $_source');
-      // 1.
-      switch (_source.keys.toList()[0]) {
-        case ConnectivityResult.mobile:
-          string =
-              _source.values.toList()[0] ? 'Mobile: Online' : 'Mobile: Offline';
-          break;
-        case ConnectivityResult.wifi:
-          string =
-              _source.values.toList()[0] ? 'WiFi: Online' : 'WiFi: Offline';
-          break;
-        case ConnectivityResult.none:
-        default:
-          string = 'Offline';
-      }
-    });
+    checkNetworkConnectivity();
   }
 
   @override
@@ -61,7 +77,7 @@ class _TodoListState extends State<TodoList> {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : state.status.isError
+                : state.status.isError || isOffline
                     ? const ErrorTodoWidget()
                     : const SizedBox();
       },
