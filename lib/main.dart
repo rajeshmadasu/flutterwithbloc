@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:httpapisample/todo_list.dart';
-import './login.dart';
+import 'ui/login/page/login.dart';
+import 'ui/todo_widget/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the FirstScreen widget.
         '/loginscreen': (context) => const LoginScreen(),
         // When navigating to the "/second" route, build the SecondScreen widget.
-        '/todolist': (context) => const TodoList(),
+        '/todolist': (context) => const HomePage(),
       },
     );
   }
