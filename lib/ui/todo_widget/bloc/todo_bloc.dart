@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../models/todo.dart';
-import '../../../respository/TodoRepo.dart';
+import '../../../todo_repository/TodoRepo.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';

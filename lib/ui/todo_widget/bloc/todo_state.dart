@@ -2,7 +2,7 @@ part of 'todo_bloc.dart';
 
 enum TodoStatus { initial, success, error, loading, selected }
 
-extension CategoryStatusX on TodoStatus {
+extension TodoStatusX on TodoStatus {
   bool get isInitial => this == TodoStatus.initial;
   bool get isSuccess => this == TodoStatus.success;
   bool get isError => this == TodoStatus.error;

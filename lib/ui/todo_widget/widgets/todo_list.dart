@@ -8,9 +8,7 @@ import 'error_widget.dart';
 import 'todo_success_widget.dart';
 
 class TodoList extends StatefulWidget {
-  final NetworkConnectivity _networkConnectivity = NetworkConnectivity.instance;
-
-  TodoList({super.key});
+  const TodoList({super.key});
 
   @override
   State<TodoList> createState() => _TodoListState();
@@ -27,31 +25,22 @@ class _TodoListState extends State<TodoList> {
   void checkNetworkConnectivity() {
     _networkConnectivity.myStream.listen((source) {
       _source = source;
-      //print('source $_source');
-
-      // 1.
       switch (_source.keys.toList()[0]) {
         case ConnectivityResult.mobile:
           isMobileOnline = _source.values.toList()[0];
-          //   string = isMobileOnline ? 'Mobile: Online' : 'Mobile: Offline';
-
           break;
         case ConnectivityResult.wifi:
           isWifiOnline = _source.values.toList()[0];
-          //   string = isWifiOnline ? 'WiFi: Online' : 'WiFi: Offline';
           break;
         case ConnectivityResult.none:
-
         default:
-        //  string = 'Offline';
+      }
+      if (!isMobileOnline && !isWifiOnline) {
+        setState(() {
+          isOffline = true;
+        });
       }
     });
-
-    if (!isMobileOnline && !isWifiOnline) {
-      setState(() {
-        isOffline = true;
-      });
-    }
   }
 
   @override

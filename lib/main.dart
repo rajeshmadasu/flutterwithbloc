@@ -1,31 +1,14 @@
 import 'package:flutter/material.dart';
-import 'ui/login/page/login.dart';
-import 'ui/todo_widget/pages/home_page.dart';
+
+import 'app.dart';
+import 'login_repository/authentication_repository.dart';
+import 'user_repository/user_repository.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Todo App',
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch()
-              .copyWith(primary: Colors.blue, error: Colors.red)
-              .copyWith(secondary: Colors.amber)),
-      home: const LoginScreen(),
-      initialRoute: '/',
-      routes: {
-        // When navigating to the "/" route, build the FirstScreen widget.
-        '/loginscreen': (context) => const LoginScreen(),
-        // When navigating to the "/second" route, build the SecondScreen widget.
-        '/todolist': (context) => const HomePage(),
-      },
-    );
-  }
+  runApp(
+    App(
+      authenticationRepository: AuthenticationRepository(),
+      userRepository: UserRepository(),
+    ),
+  );
 }

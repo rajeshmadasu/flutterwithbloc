@@ -35,13 +35,8 @@ class TodoItem extends StatelessWidget {
                 alignment: Alignment.center,
                 height: state ? 70.0 : 60.0,
                 width: state ? 70.0 : 60.0,
-                // ignore: prefer_const_constructors
-                child: Icon(
-                  Icons.task,
-                  color: todo.isCompleted
-                      ? Colors.red.shade300
-                      : Colors.green.shade300,
-                ),
+                child: Checkbox(
+                    value: todo.isCompleted, onChanged: ((value) => {})),
               ),
               SizedBox(width: 10.0),
               Expanded(

@@ -8,36 +8,37 @@ class ErrorTodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TodoBloc, TodoState>(
-      builder: (context, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // ignore: prefer_const_constructors
-            Center(
-              child: const Text(
-                'Something was wrong',
-                style: TextStyle(
-                  color: Colors.red,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // ignore: prefer_const_constructors
+        Center(
+          child: const Text(
+            'Something went wrong',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
             ),
-            Center(
-              child: TextButton(
-                child: const Text(
-                  'Refresh',
-                  textAlign: TextAlign.center,
-                ),
-                onPressed: () {
-                  context.read<TodoBloc>().add(GetTodo());
-                },
-              ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const Center(
+          child: Text(
+            'Give it another try',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Center(
+          child: TextButton(
+            child: const Text(
+              'RELOAD',
+              textAlign: TextAlign.center,
             ),
-          ],
-        );
-      },
+            onPressed: () {
+              context.read<TodoBloc>().add(GetTodo());
+            },
+          ),
+        ),
+      ],
     );
   }
 }
